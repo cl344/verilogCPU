@@ -1,0 +1,2 @@
+Warning (10268): Verilog HDL information at dffe.v(7): always construct contains both blocking and non-blocking assignments File: C:/Users/cheng/Desktop/regfile/dffe.v Line: 7
+Warning (10273): Verilog HDL warning at register.v(17): extended using "x" or "z" File: C:/Users/cheng/Desktop/regfile/register.v Line: 17

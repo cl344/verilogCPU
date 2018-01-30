@@ -1,0 +1,35 @@
+module my_register(d,clk,clr,we,re,out);
+		input [31:0] d;
+		input clk,clr,we,re;
+		output [31:0] out;
+		reg[31:0] out;
+		reg [31:0] di;
+		
+		genvar i;
+		generate
+			for(i=0;i<32;i=i+1)
+				begin:loop1
+					my_dffe dt(.d(d[i]),.aclr(clr),.clk(clk),.q(di[i]),.we(we));
+				end
+		endgenerate
+		
+		always @(negedge clk)
+			assign out = re?di: 32'bz;
+endmodule
+			
+		
+//		wire o0,o1,o2,o3,o4,o5,o6,o7,o8,o9,o10,o11,o12,o13,o14,o15,o16,o17,o18,o19,o20,o21,o22,o23,o24,o25,o26,o27,o28,o29,o30,o31;
+//		
+//		dffe d0(.d(d[0]),.aclr(clr),.clk(clk),.q(o0),.we(we)); //0
+//		dffe d1(.d(d[1]),.aclr(clr),.clk(clk),.q(o1),.we(we)); //1
+//		dffe d2(.d(d[2]),.aclr(clr),.clk(clk),.q(o2),.we(we)); //2
+//		dffe d3(.d(d[3]),.aclr(clr),.clk(clk),.q(o3),.we(we)); //3
+//		dffe d4(.d(d[4]),.aclr(clr),.clk(clk),.q(o4),.we(we)); //4
+//		dffe d5(.d(d[5]),.aclr(clr),.clk(clk),.q(o5),.we(we)); //5
+//		dffe d6(.d(d[6]),.aclr(clr),.clk(clk),.q(o6),.we(we)); //6
+//		dffe d7(.d(d[7]),.aclr(clr),.clk(clk),.q(o7),.we(we)); //7
+//		dffe d1(.d(d[8]),.aclr(clr),.clk(clk),.q(o8),.we(we)); //8
+//		dffe d1(.d(d[9]),.aclr(clr),.clk(clk),.q(o9),.we(we)); //9
+//		dffe d1(.d(d[10]),.aclr(clr),.clk(clk),.q(o10),.we(we)); //10
+//	
+//		

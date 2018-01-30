@@ -1,0 +1,13 @@
+module dffe(d,aclr,clk,q,en);
+		input d, aclr, clk, en;
+		output q;
+		
+		always @(posedge clk or posedge aclr) begin
+			if(aclr) begin
+				q = 1'b0;
+				end 
+			else begin
+				q = d;
+				end
+			end
+endmodule 
