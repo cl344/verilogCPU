@@ -1,0 +1,39 @@
+module sl1(in,out);
+
+input [31:0] in;
+output [31:0] out;
+
+assign out[0] = 1'b0;
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+assign out[1] = in[0];
+
+endmodule

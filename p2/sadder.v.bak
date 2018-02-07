@@ -1,0 +1,121 @@
+module sadder(sub,in1,in2,out,ovf);
+
+input sub;
+input [31:0] in1,in2;
+output [31:0] out;
+output ovf;
+
+wire [31:0] s0;
+wire [31:0] c0;
+wire [31:0] s1;
+wire [31:0] c1;
+
+wire [31:0] cin;
+wire [31:0] in2a;
+
+wire [3:0] ovft;
+wire endn,nsub,nin1,nin2,nendn;
+
+
+genvar j;
+
+for(j=0;j<32;j=j+1) begin:loop0
+
+assign in2a[j] = sub? ~in2[j]:in2[j];
+
+end
+endgenvar;
+
+
+genvar i;
+
+for(i=0;i<32;i=i+1) begin:loop1
+adder a(in1[i],in2a[i],s0[i],c0[i],s1[i],c1[i]);
+
+end
+endgenvar;
+
+assign out[0] = sub? s1[0]:s0[0];
+assign cin[0] = sub? c1[0]:c0[0];
+
+assign out[1] = cin[0]? s1[1]:s0[1];
+assign cin[1] = cin[0]? c1[1]:c0[1];
+assign out[2] = cin[1]? s1[2]:s0[2];
+assign cin[2] = cin[1]? c1[2]:s0[2];
+assign out[3] = cin[2]? s1[3]:s0[3];
+assign cin[3] = cin[2]? c1[3]:s0[3];
+assign out[4] = cin[3]? s1[4]:s0[4];
+assign cin[4] = cin[3]? c1[4]:s0[4];
+assign out[5] = cin[4]? s1[5]:s0[5];
+assign cin[5] = cin[4]? c1[5]:s0[5];
+assign out[6] = cin[5]? s1[6]:s0[6];
+assign cin[6] = cin[5]? c1[6]:s0[6];
+assign out[7] = cin[6]? s1[7]:s0[7];
+assign cin[7] = cin[6]? c1[7]:s0[7];
+assign out[8] = cin[7]? s1[8]:s0[8];
+assign cin[8] = cin[7]? c1[8]:s0[8];
+assign out[9] = cin[8]? s1[9]:s0[9];
+assign cin[9] = cin[8]? c1[9]:s0[9];
+assign out[10] = cin[9]? s1[10]:s0[10];
+assign cin[10] = cin[9]? c1[10]:s0[10];
+assign out[11] = cin[10]? s1[11]:s0[11];
+assign cin[11] = cin[10]? c1[11]:c0[11];
+assign out[12] = cin[11]? s1[12]:s0[12];
+assign cin[12] = cin[11]? c1[12]:s0[12];
+assign out[13] = cin[12]? s1[13]:s0[13];
+assign cin[13] = cin[12]? c1[13]:s0[13];
+assign out[14] = cin[13]? s1[14]:s0[14];
+assign cin[14] = cin[13]? c1[14]:s0[14];
+assign out[15] = cin[14]? s1[15]:s0[15];
+assign cin[15] = cin[14]? c1[15]:s0[15];
+assign out[16] = cin[15]? s1[16]:s0[16];
+assign cin[16] = cin[15]? c1[16]:s0[16];
+assign out[17] = cin[16]? s1[17]:s0[17];
+assign cin[17] = cin[16]? c1[17]:s0[17];
+assign out[18] = cin[17]? s1[18]:s0[18];
+assign cin[18] = cin[17]? c1[18]:s0[18];
+assign out[19] = cin[18]? s1[19]:s0[19];
+assign cin[19] = cin[18]? c1[19]:s0[19];
+assign out[20] = cin[19]? s1[20]:s0[20];
+assign cin[20] = cin[19]? c1[20]:s0[20];
+assign out[21] = cin[20]? s1[21]:s0[21];
+assign cin[21] = cin[20]? c1[21]:c0[21];
+assign out[22] = cin[21]? s1[22]:s0[22];
+assign cin[22] = cin[21]? c1[22]:s0[22];
+assign out[23] = cin[22]? s1[23]:s0[23];
+assign cin[23] = cin[22]? c1[23]:s0[23];
+assign out[24] = cin[23]? s1[24]:s0[24];
+assign cin[24] = cin[23]? c1[24]:s0[24];
+assign out[25] = cin[24]? s1[25]:s0[25];
+assign cin[25] = cin[24]? c1[25]:s0[25];
+assign out[26] = cin[25]? s1[26]:s0[26];
+assign cin[26] = cin[25]? c1[26]:s0[26];
+assign out[27] = cin[26]? s1[27]:s0[27];
+assign cin[27] = cin[26]? c1[27]:s0[27];
+assign out[28] = cin[27]? s1[28]:s0[28];
+assign cin[28] = cin[27]? c1[28]:s0[28];
+assign out[29] = cin[28]? s1[29]:s0[29];
+assign cin[29] = cin[28]? c1[29]:s0[29];
+assign out[30] = cin[29]? s1[30]:s0[30];
+assign cin[30] = cin[29]? c1[30]:s0[30];
+
+assign endn = cin[30]? s1[31]:s0[31];
+assign out[31] = endn;
+assign cin[31] = cin[30]? c1[31]:s0[31];
+
+
+
+not n1(nsub,sub);
+not n2(nin1,~in1[31]);
+not n3(nin2,~in2[31]);
+not n4(nendn,endn);
+
+and n1(ovft[0],nsub,nin1,nin2,endn);
+and n2(ovft[1],nsub,in1[31],in2[31],nendn);
+and n3(ovft[2],sub,in1[31],nin2,nendn);
+and n4(ovft[3],sub,nin1,in2[31],endn);
+
+or o1(ovf,ovft[0],ovft[1],ovft[2],ovft[3]);
+
+endmodule
+
